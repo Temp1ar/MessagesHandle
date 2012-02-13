@@ -1,6 +1,15 @@
 import java.io.*;
 
+/**
+ * The starting point of this application.
+ */
 public class Main {
+    /**
+     * First argument is the input file with bunch of messages. Application
+     * reads messages one by one and after "compressing" writes it to the
+     * output file(second argument) or to console.
+     * @param args arguments: args[0] input file, args[1] output file
+     */
     public static void main(String[] args) {
         String inputFilePath = null;
         String outputFilePath = null;
@@ -28,9 +37,9 @@ public class Main {
             )
         {
             FileMessageReader messageReader = new FileMessageReader(input);
-            MessageWriter targetWriter = (output == null) ?
-                    new ConsoleMessageWriter():
-                    new FileMessageWriter(output);
+            MessageWriter targetWriter = (output == null)
+                    ? new ConsoleMessageWriter()
+                    : new FileMessageWriter(output);
 
             CompressingMessageWriter compressor =
                     new CompressingMessageWriter(targetWriter);
@@ -44,12 +53,15 @@ public class Main {
 
             } catch (IllegalMessageFormatException|IOException e) {
                 System.err.println(e);
+                e.printStackTrace(System.err);
             }
 
         } catch (FileNotFoundException e) {
             System.err.println(e);
+            e.printStackTrace(System.err);
         } catch (IOException e) {
             System.err.println(e);
+            e.printStackTrace(System.err);
         }
     }
 }
