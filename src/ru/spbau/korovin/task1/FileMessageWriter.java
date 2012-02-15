@@ -1,23 +1,28 @@
+package ru.spbau.korovin.task1;
+
 import java.io.BufferedWriter;
+import java.io.Closeable;
 import java.io.IOException;
 
 /**
  * Message writer which prints message to file in following format:
- * <code>
- *     n # of lines in message
- *     Line 1
- *     Line 2
- *     ...
- *     Line n
- * </code>
+ * <blockquote><pre>
+ * {@code
+ * n # of lines in message
+ * Line 1
+ * Line 2
+ * ...
+ * Line n
+ * }
+ * </blockquote></pre>
  */
-public class FileMessageWriter implements MessageWriter {
+public class FileMessageWriter implements MessageWriter, Closeable {
     private BufferedWriter out;
 
     /**
      * Constructs the object using buffered writer
-     * @param out buffered writer for target file
-     * @throws IOException if IO error occurs
+     * @param out Buffered writer for target file
+     * @throws IOException If IO error occurs
      */
     public FileMessageWriter(BufferedWriter out) throws IOException {
         this.out = out;
@@ -26,7 +31,7 @@ public class FileMessageWriter implements MessageWriter {
 
      /**
      * Ensures that buffered writer still opened
-     * @throws IOException if IO error occurs
+     * @throws IOException If IO error occurs
      */
     private void ensureOpen() throws IOException {
         if (out == null) {
@@ -36,8 +41,8 @@ public class FileMessageWriter implements MessageWriter {
 
     /**
      * Writes message to file
-     * @param message message to write
-     * @throws IOException if IO error occurs
+     * @param message Message to write
+     * @throws IOException If IO error occurs
      */
     public void writeMessage(Message message) throws IOException {
         ensureOpen();
@@ -47,5 +52,13 @@ public class FileMessageWriter implements MessageWriter {
             out.write(message.getLine(i));
             out.newLine();
         }
+    }
+
+    /**
+     * Frees resources
+     * @throws IOException If IO error occurs
+     */
+    public void close() throws IOException {
+        out.close();
     }
 }

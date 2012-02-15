@@ -1,4 +1,7 @@
+package ru.spbau.korovin.task1;
+
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +9,13 @@ import java.util.List;
 /**
  * Class that reads messages from file.
  */
-public class FileMessageReader {
+public class FileMessageReader implements Closeable {
     private BufferedReader in;
 
     /**
      * Constructs object using buffered reader
-     * @param in buffered reader
-     * @throws IOException if IO error occurs
+     * @param in Buffered reader
+     * @throws IOException If IO error occurs
      */
     FileMessageReader(BufferedReader in) throws IOException {
         this.in = in;
@@ -21,7 +24,7 @@ public class FileMessageReader {
 
     /**
      * Ensures that buffered reader still opened
-     * @throws IOException if IO error occurs
+     * @throws IOException If IO error occurs
      */
     private void ensureOpen() throws IOException {
         if (in == null) {
@@ -31,10 +34,11 @@ public class FileMessageReader {
 
     /**
      * Reads one message from file to array, constructs message and return it.
-     * @return message read from file
-     * @throws IOException if IO error occurs
-     * @throws IllegalMessageFormatException if in first line of message
-     * not numeric string
+     * @return Message read from file
+     * @throws IOException If IO error occurs
+     * @throws IllegalMessageFormatException If in first line of message
+     * not numeric string or count of lines in head of message do not match
+     * actual line count.
      */
     public Message readMessage() throws IOException, IllegalMessageFormatException {
         Integer lineCount;
@@ -52,11 +56,29 @@ public class FileMessageReader {
                     "message is not a number.");
         }
 
-        List<String> buffer = new ArrayList<String>();
+        List<String> buffer = new ArrayList<>();
+        String line;
         for (int i = 0; i < lineCount; i++) {
-            buffer.add( in.readLine() );
+            line = in.readLine();
+            if(line == null) {
+                throw new IllegalMessageFormatException("Incorrect number of" +
+                    " strings in message.");
+            } else {
+                buffer.add( line );
+            }
         }
 
         return new Message(buffer);
+    }
+
+    /**
+     * Frees resources
+     * @throws IOException If IO error occurs
+     */
+    public void close() throws IOException {
+        if (in == null)
+            return;
+        in.close();
+        in = null;
     }
 }

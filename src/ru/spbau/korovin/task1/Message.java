@@ -1,3 +1,5 @@
+package ru.spbau.korovin.task1;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,19 +15,19 @@ public class Message {
 
     /**
      * Constructs the message from array of strings.
-     * @param data array of strings
+     * @param data Array of strings
      */
     public Message(List<String> data) {
-        contents = new ArrayList<String>();
+        contents = new ArrayList<>();
         contents.addAll(data);
     }
 
     /**
      * Copy constructor.
-     * @param copy message object to copy
+     * @param copy Message to copy
      */
     public Message(Message copy) {
-        contents = new ArrayList<String>(copy.getLines());
+        contents = new ArrayList<>(copy.getLines());
     }
 
     /**
@@ -38,7 +40,7 @@ public class Message {
 
     /**
      * Returns the whole collection of strings.
-     * @return array of strings
+     * @return Array of strings
      */
     public List<String> getLines() {
         return Collections.unmodifiableList(contents);

@@ -1,3 +1,5 @@
+package ru.spbau.korovin.task1;
+
 import java.io.IOException;
 
 /**
@@ -6,7 +8,7 @@ import java.io.IOException;
 public interface MessageWriter {
     /**
      * Writes message somewhere.
-     * @param message message to write
+     * @param message Message to write
      * @throws IOException throws if there any IO error occurs
      */
     void writeMessage(Message message) throws IOException;

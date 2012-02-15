@@ -1,3 +1,5 @@
+package ru.spbau.korovin.task1;
+
 import java.io.IOException;
 
 /**
@@ -9,7 +11,7 @@ public class CompressingMessageWriter implements MessageWriter {
 
     /**
      * Constructs the object with desired message writer
-     * @param writer desired message writer
+     * @param writer Desired message writer
      */
     public CompressingMessageWriter(MessageWriter writer) {
         this.writer = writer;
@@ -18,8 +20,8 @@ public class CompressingMessageWriter implements MessageWriter {
     /**
      * Fills the buffer if its empty. If the buffer is not empty
      * method appends second message to buffer and flushes it.
-     * @param message message to write
-     * @throws IOException if IO error occurs
+     * @param message Message to write
+     * @throws IOException If IO error occurs
      */
     public void writeMessage(Message message) throws IOException {
         if(buffer == null) {
@@ -32,7 +34,7 @@ public class CompressingMessageWriter implements MessageWriter {
 
     /**
      * Flushes internal buffer
-     * @throws IOException if IO error occurs
+     * @throws IOException If IO error occurs
      */
     public void flushBuffer() throws IOException {
         if(buffer != null) {

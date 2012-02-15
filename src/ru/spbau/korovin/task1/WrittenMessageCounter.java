@@ -1,3 +1,5 @@
+package ru.spbau.korovin.task1;
+
 /**
  * Simple singleton class counter. Used to enumerate messages that were
  * written to console.
@@ -9,7 +11,7 @@ public class WrittenMessageCounter {
 
     /**
      *  Returns instance of class
-     * @return instance of class
+     * @return Instance of class
      */
     public static WrittenMessageCounter getInstance() {
         return ourInstance;
@@ -24,7 +26,7 @@ public class WrittenMessageCounter {
 
     /**
      *  Returns counter value as string.
-     * @return the value of counter casted to string
+     * @return The value of counter casted to string
      */
     public String toString() {
         return counter + "";
