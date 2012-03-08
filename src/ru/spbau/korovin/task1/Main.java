@@ -34,15 +34,12 @@ public class Main {
             FileMessageReader messageReader =
                     new FileMessageReader(
                         new BufferedReader(new FileReader(inputFilePath)));
-            FileMessageWriter fileWriter = (outputFilePath != null)
+            MessageWriter targetWriter = (outputFilePath != null)
                     ? new FileMessageWriter(
                         new BufferedWriter(new FileWriter(outputFilePath)))
-                    : null
+                    :  ConsoleMessageWriter.getInstance()
             )
         {
-            MessageWriter targetWriter = (fileWriter == null)
-                    ? ConsoleMessageWriter.getInstance()
-                    : fileWriter;
 
             CompressingMessageWriter compressor =
                     new CompressingMessageWriter(targetWriter);

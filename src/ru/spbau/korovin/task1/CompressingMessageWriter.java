@@ -42,4 +42,16 @@ public class CompressingMessageWriter implements MessageWriter {
             buffer = null;
         }
     }
+
+    /**
+     * Closes this stream and releases any system resources associated
+     * with it. If the stream is already closed then invoking this
+     * method has no effect.
+     *
+     * @throws java.io.IOException if an I/O error occurs
+     */
+    @Override
+    public void close() throws IOException {
+        writer.close();
+    }
 }

@@ -1,5 +1,7 @@
 package ru.spbau.korovin.task1;
 
+import java.io.IOException;
+
 /**
  * Message writer(singleton) which prints message to console in following
  * format:
@@ -41,5 +43,17 @@ public class ConsoleMessageWriter implements MessageWriter {
     }
 
     private ConsoleMessageWriter() {        
+    }
+
+    /**
+     * Closes this stream and releases any system resources associated
+     * with it. If the stream is already closed then invoking this
+     * method has no effect.
+     *
+     * @throws java.io.IOException if an I/O error occurs
+     */
+    @Override
+    public void close() throws IOException {
+        //do nothing
     }
 }

@@ -16,7 +16,7 @@ import java.io.IOException;
  * }
  * </blockquote></pre>
  */
-public class FileMessageWriter implements MessageWriter, Closeable {
+public class FileMessageWriter implements MessageWriter {
     private BufferedWriter out;
 
     /**
